@@ -16,10 +16,10 @@ gulp.task('sass', function() {
         .pipe(gulp.dest("dist/css"))
         .pipe(browserSync.stream());
 });
-gulp.task("html", function() {
-    return gulp.src(['app/*.html'])
-    .pipe(gulp.dest("dist"));
-});
+// gulp.task("html", function() {
+//     return gulp.src(['app/*.html'])
+//     .pipe(gulp.dest("dist"));
+// });
 gulp.task("scripts", function() {
     return gulp.src(['app/js/*.js'])
     .pipe(gulp.dest("dist/js"));
@@ -27,14 +27,14 @@ gulp.task("scripts", function() {
 
 
 // Static Server + watching scss/html files
-gulp.task('serve', gulp.series('sass', 'html', 'scripts',  function() {
+gulp.task('serve', gulp.series('sass', 'scripts',  function() {
 
     browserSync.init({
         server: "./app"  
     });
 
     gulp.watch(['app/scss/*.scss'], gulp.series('sass'));
-    gulp.watch(['app/*.html'], gulp.series('html'));
+    // gulp.watch(['app/*.html'], gulp.series('html'));
     gulp.watch(['app/js/*.js'], gulp.series('scripts'));
     gulp.watch("app/*.html").on('change', browserSync.reload);
 }));
